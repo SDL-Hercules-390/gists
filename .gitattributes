@@ -1,0 +1,4 @@
+*               text=auto
+.gitattributes  text
+*.cmd           text  eol=crlf
+*.cmd.ini       text  eol=crlf
