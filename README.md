@@ -13,7 +13,7 @@ The _manual_ method for building the External Packages is documented in both the
 
 <h3 align=center>The extpkgs script is designed to make things even easier</h3>
 
-Simply create a directory somewhere (e.g. `extpkgs`), switch to that directory, and then enter the `extpkgs` command (or on Linux, `extpkgs.sh`) to have each external package. cloned or updated and built within that directory:
+Simply create a directory somewhere (e.g. `extpkgs`), switch to that directory, and then enter the `extpkgs` command (or on Linux, `extpkgs.sh`) to have each external package cloned or updated and built within that same directory:
 
 
 ````
