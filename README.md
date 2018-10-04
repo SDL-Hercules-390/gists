@@ -112,7 +112,7 @@ cmdline = extpkgs.sh --help
 
     SYNOPSIS
 
-        extpkgs.sh       [C]  [D]  [S]  [T]
+        extpkgs.sh      { [CLONE | UPDATE]   [C]  [D]  [S]  [T] }
 
     DESCRIPTION
 
