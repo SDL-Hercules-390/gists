@@ -18,7 +18,7 @@ HELP()
   errmsg ""
   errmsg "    SYNOPSIS"
   errmsg ""
-  errmsg "        $nx0       [C]  [D]  [S]  [T]"
+  errmsg "        $nx0      { [CLONE | UPDATE]   [C]  [D]  [S]  [T] }"
   errmsg ""
   errmsg "    DESCRIPTION"
   errmsg ""
