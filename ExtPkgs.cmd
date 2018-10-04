@@ -666,6 +666,11 @@
 
   if %maxrc% EQU 0 (
     echo All External Packages SUCCESSFULLY built!  :^)^)
+    echo.
+    echo Don't forget to update your 'LIB' and 'INCLUDE' variables to point to
+    echo "%install_dir%\lib" and "%install_dir%\include" before building Hercules
+    echo or use the '-extpkg ^"%install_dir%^"' option on your 'makefile.bat'
+    echo command. (Using the environment variables technique is easier IMO.)
   ) else (
     echo One or more External Packages has FAILED!  :^(
   )

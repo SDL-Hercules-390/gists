@@ -777,6 +777,12 @@ BUILD()
 
   if (( $maxrc == 0 )); then
     logmsg "All External Packages SUCCESSFULLY built!  :))"
+    logmsg ""
+    logmsg "Don't forget to update your 'LIBRARY_PATH' and 'CPATH' variables to"
+    logmsg "point to '${install_dir}/lib' and '${install_dir}/include' before"
+    logmsg "building Hercules, or else use the '--enable-extpkgs=${install_dir}'"
+    logmsg "option on your './configure' command."
+    logmsg ""
   else
     logmsg "One or more External Packages has FAILED!  :("
   fi
