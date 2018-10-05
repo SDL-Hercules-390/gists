@@ -1,4 +1,11 @@
 *               text=auto
+
 .gitattributes  text
+
 *.cmd           text  eol=crlf
 *.cmd.ini       text  eol=crlf
+
+*.sh            text  eol=lf
+*.sh.ini        text  eol=lf
+
+README.md       text
