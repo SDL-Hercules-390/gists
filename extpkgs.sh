@@ -464,6 +464,8 @@ parse_args()
 #------------------------------------------------------------------------------
 parse_ctlfile()
 {
+  # Make sure the file exists
+
   fullpath  "${ctlfile}"  ctlfile
   if [[ -z $fullpath ]]; then
     errmsg ""
@@ -478,6 +480,10 @@ parse_ctlfile()
     exit_rc1
   fi
 
+  # Initialize variables
+
+  get_default_cpu
+
   cpu=""
   install_dir=""
   crypto_repo=""
@@ -485,18 +491,74 @@ parse_ctlfile()
   softfloat_repo=""
   telnet_repo=""
 
+  # Read and parse the control file, statement by statement...
+
   while  read -r  CTLFILE_STMT
   do
     if [ -n    "${CTLFILE_STMT}" ]; then
-      parse_and_process_ctlfile_stmt
+      parse_ctlfile_stmt
     fi
   done < "${ctlfile}"
+
+  # Validate cpu
+
+  if [[ -z $cpu ]]; then
+    cpu="${default_cpu}"
+  fi
+
+  if [[ $cpu != "${default_cpu}" ]]; then
+    errmsg ""
+    errmsg "ERROR: control file specifies \"cpu = ${cpu}\" but actual cpu is \"${default_cpu}\""
+    exit_rc1
+  fi
 }
 
 #------------------------------------------------------------------------------
-#                      parse_and_process_ctlfile_stmt
+#                             get_default_cpu
 #------------------------------------------------------------------------------
-parse_and_process_ctlfile_stmt()
+get_default_cpu()
+{
+  case "$(uname -m)" in
+
+    amd*)
+      default_cpu="x86"
+      ;;
+
+    arm*)
+      default_cpu="arm"
+      ;;
+
+    mips*)
+      default_cpu="mips"
+      ;;
+
+    ppc*)
+      default_cpu="ppc"
+      ;;
+
+    sparc*)
+      default_cpu="sparc"
+      ;;
+
+    xscale*)
+      default_cpu="xscale"
+      ;;
+
+    x86*)
+      default_cpu="x86"
+      ;;
+
+    *)
+      default_cpu="unknown"
+      ;;
+
+  esac
+}
+
+#------------------------------------------------------------------------------
+#                           parse_ctlfile_stmt
+#------------------------------------------------------------------------------
+parse_ctlfile_stmt()
 {
   local ARRAY=()
   IFS='=' read -ra ARRAY <<< "${CTLFILE_STMT}"

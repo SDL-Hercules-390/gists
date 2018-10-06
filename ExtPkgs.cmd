@@ -378,11 +378,17 @@
 ::------------------------------------------------------------------------------
 :parse_ctlfile
 
+  :: Make sure the file exists
+
   call :fullpath  "%ctlfile%"  ctlfile
   if not defined # goto :ctlfile_notfound
 
   call :isfile  "%ctlfile%"
   if not defined isfile goto :ctlfile_notfound
+
+  :: Initialize variables
+
+  call :get_default_cpu
 
   set "cpu="
   set "install_dir="
@@ -391,8 +397,22 @@
   set "softfloat_repo="
   set "telnet_repo="
 
+  :: Read and parse the control file, statement by statement...
+
   for /f "tokens=1,2,*" %%a in ('type "%ctlfile%"') do (
-    call :parse_tokens "%%a" "%%b" "%%c"
+    call :parse_ctlfile_stmt "%%a" "%%b" "%%c"
+  )
+
+  :: Validate cpu
+
+  if not defined cpu (
+    set "cpu=%default_cpu%"
+  )
+
+  if /i not "%cpu%" == "%default_cpu%" (
+    echo.
+    echo ERROR: control file specifies "cpu = %cpu%" but actual cpu is "%default_cpu%" 1>&2
+    set "rc=1"
   )
 
   %return%
@@ -406,9 +426,26 @@
 
 
 ::-----------------------------------------------------------------------------
-::                             parse_tokens
+::                           get_default_cpu
 ::-----------------------------------------------------------------------------
-:parse_tokens
+:get_default_cpu
+
+  set "default_cpu="
+
+  if /i "%PROCESSOR_ARCHITECTURE%" == "AMD64" set "default_cpu=x86"
+  if /i "%PROCESSOR_ARCHITECTURE%" == "ARM64" set "default_cpu=arm"
+  if /i "%PROCESSOR_ARCHITECTURE%" == "IA64"  set "default_cpu=unknown"
+
+  if not defined default_cpu (
+    set "default_cpu=x86"
+  )
+  %return%
+
+
+::-----------------------------------------------------------------------------
+::                           parse_ctlfile_stmt
+::-----------------------------------------------------------------------------
+:parse_ctlfile_stmt
 
   set "reponame=%~1"
   set "equals=%~2"
