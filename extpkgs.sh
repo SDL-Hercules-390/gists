@@ -3,8 +3,8 @@
   #  If this bash script works then it was written by Fish.
   #  If it doesn't then I don't know who the heck wrote it.
 
-  _versnum="1.0"
-  _versdate="September 18, 2018"
+  _versnum="1.1"
+  _versdate="October 6, 2018"
 
 #------------------------------------------------------------------------------
 #                               EXTPKGS.SH
