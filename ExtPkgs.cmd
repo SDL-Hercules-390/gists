@@ -1,8 +1,8 @@
 @if defined TRACEON (@echo on) else (@echo off)
   setlocal
 
-  set "_versnum=1.1"
-  set "_versdate=October 6, 2018"
+  set "_versnum=1.2"
+  set "_versdate=February 21, 2019"
 
   REM    If this batch file works then it was written by Fish.
   REM    If it doesn't then I don't know who the heck wrote it.
@@ -754,13 +754,15 @@
 
   pushd "%pkg_repo%"
 
+    REM The following is needed because "git" uses LF line endings instead or CRLF
     call :tempfn  tempfn  .txt
-    "%git.exe%"  pull  "%git_url%/%pkg_name%.git"  "master"  >  "%tempfn%"  2>&1
+
+    echo.
+    "%git.exe%" pull > "%tempfn%" 2>&1
     set /a "rc=%errorlevel%"
 
     REM The following is needed because "git" uses LF line endings instead or CRLF
     for /f "tokens=1* delims=]" %%a in ('type "%tempfn%" ^| find /V /N ""') do echo.%%b
-
     del "%tempfn%"
 
   popd

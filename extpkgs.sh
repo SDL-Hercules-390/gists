@@ -3,8 +3,8 @@
   #  If this bash script works then it was written by Fish.
   #  If it doesn't then I don't know who the heck wrote it.
 
-  _versnum="1.1"
-  _versdate="October 6, 2018"
+  _versnum="1.2"
+  _versdate="February 21, 2019"
 
 #------------------------------------------------------------------------------
 #                               EXTPKGS.SH
@@ -880,7 +880,8 @@ update_pkg()
   pkg_repo="$2"
 
   pushd "${pkg_repo}" >/dev/null 2>&1
-    "${git}"  pull  "${git_url}/${pkg_name}.git"  "master"  2>&1
+    logmsg ""
+    "${git}" pull 2>&1
     rc=$?
   popd >/dev/null 2>&1
 
