@@ -70,6 +70,7 @@
   echo.
   echo        The format of the statements is very simple:
   echo.
+  echo             cpu             =  aarch^|arm^|mips^|ppc^|sparc^|xscale^|x86^|unknown
   echo             install_dir     =  ^<dir^>
   echo             crypto_repo     =  ^<dir^>
   echo             decnumber_repo  =  ^<dir^>
@@ -479,6 +480,7 @@
 :parse_cpu
 ::-----------------
 
+  if /i "%repodir%" == "aarch"   goto :parse_cpu_ok
   if /i "%repodir%" == "arm"     goto :parse_cpu_ok
   if /i "%repodir%" == "mips"    goto :parse_cpu_ok
   if /i "%repodir%" == "ppc"     goto :parse_cpu_ok

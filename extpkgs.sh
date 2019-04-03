@@ -67,7 +67,7 @@ HELP()
   errmsg ""
   errmsg "        The format of the statements is very simple:"
   errmsg ""
-  errmsg "             cpu             =  arm|mips|ppc|sparc|xscale|x86|unknown"
+  errmsg "             cpu             =  aarch|arm|mips|ppc|sparc|xscale|x86|unknown"
   errmsg "             install_dir     =  <dir>"
   errmsg "             crypto_repo     =  <dir>"
   errmsg "             decnumber_repo  =  <dir>"
@@ -520,6 +520,10 @@ get_default_cpu()
 {
   case "$(uname -m)" in
 
+    aarch*)
+      default_cpu="aarch"
+      ;;
+
     amd*)
       default_cpu="x86"
       ;;
@@ -645,7 +649,7 @@ parse_ctlfile_stmt()
 
       case "$repodir" in
 
-        arm | mips | ppc | sparc | xscale | x86 | unknown)
+        aarch | arm | mips | ppc | sparc | xscale | x86 | unknown)
 
           cpu="${repodir}"
           ;;
