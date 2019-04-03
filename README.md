@@ -98,25 +98,25 @@ Then, to build Hercules, all you need to do is either:
 2. Specify the `--enable-extpkgs=<dir>` option on your `./configure` command. (For Windows it would be the `-extpkg "dir"` option on your `makefile.bat` command)
 
 &nbsp;
-What follows below is the `--help` information that is displayed for the Linux `extpkgs.sh` script, but the help information for the Windows `ExtPkgs.cmd` batch file is essentially identical:
+What follows below is the `--help` information that is displayed for the Windows `ExtPkgs.cmd` batch file, but the help information for the Linux `extpkgs.sh` bash script is essentially identical:
 
 &nbsp;
 
 ````
-cmdline = extpkgs.sh --help
+cmdline = ExtPkgs.cmd --help
 
 
     NAME
 
-        extpkgs.sh   --   Build and install Hercules External Package(s)
+        ExtPkgs.cmd  --  Build and install Hercules External Package(s)
 
     SYNOPSIS
 
-        extpkgs.sh      { [CLONE | UPDATE]   [C]  [D]  [S]  [T] }
+        ExtPkgs.cmd      { [CLONE | UPDATE]   [C]  [D]  [S]  [T] }
 
     DESCRIPTION
 
-        extpkgs.sh performs a full build and install of each specified
+        ExtPkgs performs a full build and install of each specified
         Hercules External Package.  It is used to automate the
         cloning, updating and/or building and installing of all
         selected External Packages with one simple command (rather
@@ -142,44 +142,43 @@ cmdline = extpkgs.sh --help
 
     EXIT STATUS
 
-        0   Success    All specified external packages built and
-                       successfully installed.
+        0   Success    All specified external packages successfully
+                       cloned, updated and/or built and installed.
 
-        1   Failure    The build or install of one or more of the
-                       specified packages has failed.
+        1   Failure    The clone, update, build or install of one
+                       or more specified packages has failed.
 
     NOTES
 
-        The required extpkgs.sh.ini control file identifies the
-        fixed parameters needed by the script, and is expected to
-        exist somewhere in your search PATH.
+       The required "ExtPkgs.cmd.ini" control file identifies the
+       fixed parameters needed by the script, and is expected to
+       exist somewhere in your search PATH.
 
-        The control file must contain statements that identify the
-        directory of each external package's repository, as well
-        as the common installation directory where each package
-        will be installed into.
+       The control file must contain statements that identify the
+       directory of each external package's repository, as well
+       as the common installation directory where each package
+       will be installed into.
 
-        The format of the statements is very simple:
+       The format of the statements is very simple:
 
-             cpu             =  arm|mips|ppc|sparc|xscale|x86|unknown
-             install_dir     =  <dir>
-             crypto_repo     =  <dir>
-             decnumber_repo  =  <dir>
-             softfloat_repo  =  <dir>
-             telnet_repo     =  <dir>
+            cpu             =  aarch|arm|mips|ppc|sparc|xscale|x86|unknown
+            install_dir     =  <dir>
+            crypto_repo     =  <dir>
+            decnumber_repo  =  <dir>
+            softfloat_repo  =  <dir>
+            telnet_repo     =  <dir>
 
-        The specified directory may be either relative or absolute.
-        Blank lines and lines beginning with '*', '#' or ';' are
-        ignored.
+       The specified directory may be either relative or absolute.
+       Blank lines and lines beginning with "*", "#" or ";" are
+       ignored.
 
     AUTHOR
 
-        "Fish"  (David B. Trout)
+        "Fish" (David B. Trout)
 
     VERSION
 
-        1.0     (September 18, 2018)
-
+        1.3  (April 2, 2019)
 ````
 
 &nbsp;
