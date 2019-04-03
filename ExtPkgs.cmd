@@ -1,8 +1,8 @@
 @if defined TRACEON (@echo on) else (@echo off)
   setlocal
 
-  set "_versnum=1.2"
-  set "_versdate=February 21, 2019"
+  set "_versnum=1.3"
+  set "_versdate=April 2, 2019"
 
   REM    If this batch file works then it was written by Fish.
   REM    If it doesn't then I don't know who the heck wrote it.
