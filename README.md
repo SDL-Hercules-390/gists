@@ -3,7 +3,7 @@
 <h2 align=center>Helpful scripts and code snippets</h2>
 
 &nbsp;
-This is a collection of helpful scripts and code snippets associated with the [SoftDevLabs](http://www.softdevlabs.com) version of the [Hercules 4.0 (Hyperion) System/370, ESA/390, and z/Architecture Emulator](https://github.com/SDL-Hercules-390/hyperion).
+This is a collection of helpful scripts and code snippets associated with the [SoftDevLabs](http://www.softdevlabs.com) version of the [Hercules 4.x (Hyperion) System/370, ESA/390, and z/Architecture Emulator](https://github.com/SDL-Hercules-390/hyperion).
 
 <h2 align=center>extpkgs</h2>
 
@@ -188,4 +188,4 @@ If you have any questions or problems with this script, create a [GitHub Issue](
 
 Thank you!
 
-The SDL Hercules 4.0 Hyperion development team
+The SDL Hercules 4.x Hyperion development team
