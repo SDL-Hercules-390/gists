@@ -67,7 +67,7 @@ HELP()
   errmsg ""
   errmsg "        The format of the statements is very simple:"
   errmsg ""
-  errmsg "             cpu             =  aarch|arm|mips|ppc|sparc|xscale|s390x|x86|unknown"
+  errmsg "             cpu             =  aarch64|arm|mips|ppc|sparc|xscale|s390x|x86|unknown"
   errmsg "             install_dir     =  <dir>"
   errmsg "             crypto_repo     =  <dir>"
   errmsg "             decnumber_repo  =  <dir>"
@@ -520,8 +520,8 @@ get_default_cpu()
 {
   case "$(uname -m)" in
 
-    aarch*)
-      default_cpu="aarch"
+    aarch64*)
+      default_cpu="aarch64"
       ;;
 
     amd*)
@@ -653,7 +653,7 @@ parse_ctlfile_stmt()
 
       case "$repodir" in
 
-        aarch | arm | mips | ppc | sparc | s390x | xscale | x86 | unknown)
+        aarch64 | arm | mips | ppc | sparc | s390x | xscale | x86 | unknown)
 
           cpu="${repodir}"
           ;;
@@ -942,10 +942,25 @@ build_pkg()
     [[ -n $isfile ]] && rm "${pkg_name}.log"
   popd >/dev/null 2>&1
 
-  (( $maxrc == 0 )) && build_ext_pkg  "64"  "Debug"
-  (( $maxrc == 0 )) && build_ext_pkg  "64"  "Release"
-  (( $maxrc == 0 )) && build_ext_pkg  "32"  "Debug"
-  (( $maxrc == 0 )) && build_ext_pkg  "32"  "Release"
+# WRL 2020-07-07
+# WRL Don't build BOTH for arm or aarch64
+  want_32bit=1
+  want_64bit=1
+
+  if [[ $cpu == "arm" ]]; then
+    logmsg "Skipping 64-bit builds on arm"
+    want_64bit=0
+  fi
+
+  if [[ $cpu == "aarch64" ]]; then
+    logmsg "  Skipping 32-bit builds on aarch64"
+    want_32bit=0
+  fi
+
+  (( want_64bit == 1 )) && (( $maxrc == 0 )) && build_ext_pkg  "64"  "Debug"
+  (( want_64bit == 1 )) && (( $maxrc == 0 )) && build_ext_pkg  "64"  "Release"
+  (( want_32bit == 1 )) && (( $maxrc == 0 )) && build_ext_pkg  "32"  "Debug"
+  (( want_32bit == 1 )) && (( $maxrc == 0 )) && build_ext_pkg  "32"  "Release"
 }
 
 #-------------------------------------------------------------------------------
