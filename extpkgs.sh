@@ -3,8 +3,8 @@
   #  If this bash script works then it was written by Fish.
   #  If it doesn't then I don't know who the heck wrote it.
 
-  _versnum="1.4"
-  _versdate="Novemver 11, 2019"
+  _versnum="1.5"
+  _versdate="October 18, 2020"
 
 #------------------------------------------------------------------------------
 #                               EXTPKGS.SH
@@ -67,7 +67,7 @@ HELP()
   errmsg ""
   errmsg "        The format of the statements is very simple:"
   errmsg ""
-  errmsg "             cpu             =  aarch64|arm|mips|ppc|sparc|xscale|s390x|x86|unknown"
+  errmsg "             cpu             =  aarch64|arm|mips|i686|ppc|s390x|sparc|x86|xscale|unknown"
   errmsg "             install_dir     =  <dir>"
   errmsg "             crypto_repo     =  <dir>"
   errmsg "             decnumber_repo  =  <dir>"
@@ -532,6 +532,10 @@ get_default_cpu()
       default_cpu="arm"
       ;;
 
+    i686*)
+      default_cpu="i686"
+      ;;
+
     mips*)
       default_cpu="mips"
       ;;
@@ -653,7 +657,7 @@ parse_ctlfile_stmt()
 
       case "$repodir" in
 
-        aarch64 | arm | mips | ppc | sparc | s390x | xscale | x86 | unknown)
+        aarch64 | arm | i686 | mips | ppc | sparc | s390x | xscale | x86 | unknown)
 
           cpu="${repodir}"
           ;;
@@ -942,11 +946,16 @@ build_pkg()
     [[ -n $isfile ]] && rm "${pkg_name}.log"
   popd >/dev/null 2>&1
 
-# WRL 2020-07-07
-# WRL Don't build BOTH for arm or aarch64
   want_32bit=1
   want_64bit=1
 
+  # Don't build BOTH for i686
+  if [[ $cpu == "i686" ]]; then
+    logmsg "Skipping 64-bit builds on i686"
+    want_64bit=0
+  fi
+
+  # Don't build BOTH for arm or aarch64
   if [[ $cpu == "arm" ]]; then
     logmsg "Skipping 64-bit builds on arm"
     want_64bit=0
