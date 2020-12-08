@@ -161,7 +161,7 @@ cmdline = ExtPkgs.cmd --help
 
        The format of the statements is very simple:
 
-            cpu             =  aarch|arm|mips|ppc|sparc|xscale|x86|unknown
+            cpu             =  aarch64|arm|i686|mips|ppc|s390x|sparc|xscale|x86|unknown
             install_dir     =  <dir>
             crypto_repo     =  <dir>
             decnumber_repo  =  <dir>
