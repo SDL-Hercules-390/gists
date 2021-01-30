@@ -9,7 +9,7 @@ This is a collection of helpful scripts and code snippets associated with the [S
 
 The one and only script at this time is the _**extpkgs**_ script which automates the cloning, updating and building of the emulator's External Package static libraries that are required in order to build the emulator.
 
-The _manual_ method for building the External Packages is documented in both the [README.EXTPKG](https://github.com/SDL-Hercules-390/hyperion/blob/master/README.EXTPKG) document that comes with the emulator itself, as well as the individual [README](https://github.com/SDL-Hercules-390/crypto/blob/master/README.md) documents that come delivered with each external package's repository.
+The _manual_ method for building the External Packages is documented in both the [README.EXTPKG](https://github.com/SDL-Hercules-390/hyperion/blob/master/readme/README.EXTPKG.md) document that comes with the emulator itself, as well as the individual [README](https://github.com/SDL-Hercules-390/crypto/blob/master/README.md) documents that come delivered with each external package's repository.
 
 <h3 align=center>The extpkgs script is designed to make things even easier</h3>
 
