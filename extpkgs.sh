@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
   #  If this bash script works then it was written by Fish.
   #  If it doesn't then I don't know who the heck wrote it.
 
-  _versnum="1.5"
-  _versdate="October 18, 2020"
+  _versnum="1.6"
+  _versdate="January 3, 2021"
 
 #------------------------------------------------------------------------------
 #                               EXTPKGS.SH
