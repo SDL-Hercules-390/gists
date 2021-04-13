@@ -528,6 +528,10 @@ get_default_cpu()
       default_cpu="x86"
       ;;
 
+    arm64*)
+      default_cpu="aarch64"
+      ;;
+
     arm*)
       default_cpu="arm"
       ;;
