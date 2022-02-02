@@ -67,7 +67,7 @@ HELP()
   errmsg ""
   errmsg "        The format of the statements is very simple:"
   errmsg ""
-  errmsg "             cpu             =  aarch64|arm|mips|i686|ppc|s390x|sparc|x86|xscale|unknown"
+  errmsg "             cpu             =  aarch64|arm|e2k|mips|i686|ppc|s390x|sparc|x86|xscale|unknown"
   errmsg "             install_dir     =  <dir>"
   errmsg "             crypto_repo     =  <dir>"
   errmsg "             decnumber_repo  =  <dir>"
@@ -536,6 +536,10 @@ get_default_cpu()
       default_cpu="arm"
       ;;
 
+    e2k*)
+      default_cpu="e2k"
+      ;;
+
     i686*)
       default_cpu="i686"
       ;;
@@ -661,7 +665,7 @@ parse_ctlfile_stmt()
 
       case "$repodir" in
 
-        aarch64 | arm | i686 | mips | ppc | sparc | s390x | xscale | x86 | unknown)
+        aarch64 | arm | e2k | i686 | mips | ppc | sparc | s390x | xscale | x86 | unknown)
 
           cpu="${repodir}"
           ;;
@@ -970,6 +974,11 @@ build_pkg()
     want_32bit=0
   fi
 
+  # Don't build BOTH for e2k
+  if [[ $cpu == "e2k" ]]; then
+    logmsg "Skipping 32-bit builds on e2k"
+    want_32bit=0
+  fi
   (( want_64bit == 1 )) && (( $maxrc == 0 )) && build_ext_pkg  "64"  "Debug"
   (( want_64bit == 1 )) && (( $maxrc == 0 )) && build_ext_pkg  "64"  "Release"
   (( want_32bit == 1 )) && (( $maxrc == 0 )) && build_ext_pkg  "32"  "Debug"
